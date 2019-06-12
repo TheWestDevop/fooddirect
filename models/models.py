@@ -2,12 +2,12 @@ from django.db import models
 from django.utils.timezone import now
 # Create your models here.
 
-class Customer_Recipes(models.Model):
+class CustomerRecipes(models.Model):
       id  = models.AutoField(primary_key=True)
       pid = models.IntegerField(blank=False)
       recipeid = models.IntegerField(blank=False)
        
-class Customer_Restrictions(models.Model):
+class CustomerRestrictions(models.Model):
     id  = models.AutoField(primary_key=True)
     pid = models.IntegerField(blank=False)
     dietid = models.IntegerField(blank=False)
@@ -42,13 +42,13 @@ class Deliveries(models.Model):
     vendor = models.CharField(max_length=500)
     receivedate = models.DateField(default=now)
 
-class Delivery_Quantities(models.Model):
+class DeliveryQuantities(models.Model):
     id         = models.AutoField(primary_key=True)
     productid  = models.IntegerField(blank=False, null=False)
     qty        = models.IntegerField(blank=False, null=False)
     deliveryid = models.IntegerField(blank=False, null=False) 
     
-class Dietary_Restrictions(models.Model):
+class DietaryRestrictions(models.Model):
       id    = models.AutoField(primary_key=True)
       name  = models.CharField(max_length=100,blank=False, null=False)
       
@@ -57,7 +57,7 @@ class Icon(models.Model):
     url = models.CharField(max_length=500,blank=False, null=False)
     credit = models.CharField(max_length=100,blank=False, null=False)
    
-class Order_Quantities(models.Model):
+class OrderQuantities(models.Model):
     id         = models.AutoField(primary_key=True)
     productid  = models.IntegerField(blank=False, null=False)
     qty        = models.IntegerField(blank=False, null=False)
