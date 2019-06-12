@@ -81,7 +81,7 @@
 
     <div class="container-fluid">
     <!-- Flashed messages show up here -->
-    {% with messages = get_flashed_messages() %}
+    {% with messages as get_flashed_messages() %}
         {% for message in messages %}
             <div class="alert alert-warning">{{ message }}</div>
         {% endfor %}
