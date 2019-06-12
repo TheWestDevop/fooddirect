@@ -106,12 +106,21 @@ class Product(models.Model):
       perunit = models.CharField(max_length=50)
       aisle   = models.CharField(max_length=50)
       category   = models.CharField(max_length=50)
-      img   = models.CharField(max_length=500)
+      img   = models.ImageField(upload_to='product_image/', blank=False)
       iconid = models.IntegerField()
       color  = models.CharField(max_length=10)
       searchitem   = models.CharField(max_length=50)
       searchstrength = models.IntegerField()
       
+      
+class Admin(models.Model):
+       id            = models.AutoField(primary_key=True)
+       username      = models.CharField(max_length=200)
+       password      = models.CharField(max_length=200)
+       secret        = models.CharField(max_length=200)
+       admintype     = models.IntegerField()
+       status        = models.IntegerField()
+       createdate    = models.CharField(max_length=200)
       
      
 

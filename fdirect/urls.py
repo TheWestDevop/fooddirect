@@ -17,12 +17,13 @@ from . import settings
 from django.contrib import admin
 from django.urls import path,include
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
-
+from manager import urls
 
 urlpatterns = [
     path('', include('website.urls')),
     #path('api/', include('api.urls')),
-	#path('manager/', include('manager.urls')),
+	path('manager/', include('manager.urls')),
     
 ]
 urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)

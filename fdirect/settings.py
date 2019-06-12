@@ -81,10 +81,10 @@ WSGI_APPLICATION = 'fdirect.wsgi.application'
 DATABASES = {
    'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd27hmqroe6jqa9',
-        'USER' : 'tsxkjzjmmixpdz',
-       'PASSWORD' :'b68074319b381a6b61639b4d008c630e38d881ebde4e00e18740f1d1e04bf2db',
-      'HOST' :'ec2-54-221-212-126.compute-1.amazonaws.com',
+        'NAME': 'd9u7o9tp1j11eh',
+        'USER' : 'cvfmanuiypruej',
+       'PASSWORD' :'92be8ce18fe51327287d93b7979dbb78c2d369eedc07a8f7cdd47f1d733c488c',
+      'HOST' :'ec2-54-225-205-79.compute-1.amazonaws.com',
        'PORT' : '5432',
     }
 }
@@ -133,7 +133,9 @@ STATICFILES_DIRS = [
 STATICFILES_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+ROOT_URL="https://fooddirect.herokuapp.com/"
 import dj_database_url
 
 prod_db = dj_database_url.config(conn_max_age=500)
