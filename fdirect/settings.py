@@ -25,7 +25,7 @@ SECRET_KEY = 'p(ds7u^bg64)o6izi)&u3j$-rl_7=$%7z6+ei)x!z+s1c2ll5n'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -79,9 +79,13 @@ WSGI_APPLICATION = 'fdirect.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+   'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd27hmqroe6jqa9',
+        'USER' : 'tsxkjzjmmixpdz',
+       'PASSWORD' :'b68074319b381a6b61639b4d008c630e38d881ebde4e00e18740f1d1e04bf2db',
+      'HOST' :'ec2-54-221-212-126.compute-1.amazonaws.com',
+       'PORT' : '5432',
     }
 }
 
@@ -129,4 +133,8 @@ STATICFILES_DIRS = [
 STATICFILES_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-STATIC_URL = '/static/'
+
+import dj_database_url
+
+prod_db = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
