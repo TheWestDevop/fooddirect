@@ -82,7 +82,7 @@ def editProduct(request,id):
            product.unit = request.POST.get('unit') 
            product.price = request.POST.get('price')
            product.priceper = request.POST.get('priceper')
-           product.perunit  = request.POST.get('perunit')
+           product.perunit  = request.POST.get('unit')
            product.aisle = request.POST.get('aisle')
            product.category = request.POST.get('category')
            img = request.FILES['img']
@@ -95,7 +95,7 @@ def editProduct(request,id):
            return redirect(listProduct) 
        
        else:
-        return render(request,'manager/editProduct.html',{'products':product})
+        return render(request,'manager/editProduct.html',{'product':product})
     else:
         return redirect(login)
 

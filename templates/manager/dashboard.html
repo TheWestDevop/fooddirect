@@ -60,7 +60,7 @@
                               <td>{{ product.category }}</td>
                               <td>{{ product.iconid }}</td>
                               <td>{{ product.color }}</td>
-                              <td><img src="/media/product.imagename.url }}" alt="product image" width="50" height="50"></td>
+                              <td><img src="{{ product.img.url }}" alt="product image" width="50" height="50"></td>
                               <td><a href="{% url 'edit-product' product.id %}" class="btn btn-facebook">Edit &nbsp; <i class="fa fa-edit"></i></a></td>
                               <td><a href="{% url 'delete-product' product.id %}" class="btn btn-danger">Delete&nbsp; <i class="fa fa-trash"></i></a></td>
                               
