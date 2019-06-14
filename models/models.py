@@ -120,7 +120,7 @@ class Admin(models.Model):
        secret        = models.CharField(max_length=200)
        admintype     = models.IntegerField()
        status        = models.IntegerField()
-       createdate    = models.CharField(max_length=200)
+       createdate = models.DateTimeField(default=now)
       
      
 

@@ -1,28 +1,22 @@
 
 
-from django.contrib import messages
-from django.contrib.auth import logout as AuthLogOut
-from django.core.files.storage import FileSystemStorage
-from django.core.exceptions import ObjectDoesNotExist
-from django.shortcuts import redirect, render
-from django.template.context_processors import request
 import hashlib
 import random
 import string
+
+from django.contrib import messages
+from django.contrib.auth import logout as AuthLogOut
+from django.core.exceptions import ObjectDoesNotExist
+from django.core.files.storage import FileSystemStorage
+from django.shortcuts import redirect, render
+from django.template.context_processors import request
+
 from models.models import *
 
 # Create your views here.
 
-def gen(request):
-    Admin.objects.create(
-        username="adminOne",
-        password="cfa44e98e50114bac02bf1e465dcc687ba72467fc7bacb36898e59a1321166e6",
-        secret="49'nv?42><",
-        admintype=1,
-        status=1,
-        createdate='2019-05-08 10:48:34.343278+00')
-    return redirect(login)
 
+#Product
 def listProduct(request):
     if request.session.has_key('token'):
        products = Product.objects.all().order_by("-id")
@@ -106,6 +100,104 @@ def deleteProduct(request,id):
           return redirect(listProduct)  
      else:
             return redirect(login)
+
+#Order
+def listOrder(request):
+    if request.session.has_key('token'):
+       orders = Orders.objects.all().order_by("-id")
+       return render(request,'manager/orders.html',{'orders': orders}) 
+    else:
+       return redirect(login)
+
+#Deliveries
+def listDeliveries(request):
+    if request.session.has_key('token'):
+       deliveries = Deliveries.objects.all().order_by("-id")
+       return render(request,'manager/deliveries.html',{'deliveries': deliveries}) 
+    else:
+       return redirect(login)
+
+#Admin crud 
+def createAdmin(request):
+      if request.session.has_key('token'):
+        products = Product.objects.all().order_by("-id")
+        if request.method == "POST":
+            username = request.POST.get('username')
+            plainpassword= request.POST.get('password')
+            secret = secretGenerator()
+            admintype = request.POST.get('admintype') 
+            
+            password = hashPassword(plainpassword+secret)
+            
+            Admin.objects.create(
+              username=username,
+              password=password,
+              secret=secret,
+              admintype=admintype,
+              status=0)
+            
+            return redirect(listAdmin)
+        return redirect(listAdmin)
+            
+      else:
+       return redirect(login)
+
+def listAdmin(request):
+    if request.session.has_key('token'):
+       admins = Admin.objects.all().order_by("-id")
+       return render(request,'manager/admin.html',{'admins': admins}) 
+    else:
+       return redirect(login)
+
+def deleteAdmin(request,id):
+     if request.session.has_key('token'):
+          admin = Admin.objects.get(id=id)
+          admin.delete()
+          return redirect(listAdmin)  
+     else:
+            return redirect(login)
+
+
+#User crud
+def createUser(request):
+      if request.session.has_key('token'):
+        products = Product.objects.all().order_by("-id")
+        if request.method == "POST":
+            username = request.POST.get('username')
+            plainpassword= request.POST.get('password')
+            secret = secretGenerator()
+            usertype = request.POST.get('usertype') 
+            
+            password = hashPassword(plainpassword+secret)
+            
+            User.objects.create(
+              username=username,
+              password=password,
+              secret=secret,
+              usertype=usertype
+              )
+            
+            return redirect(listUser)
+        return redirect(listUser)
+            
+      else:
+       return redirect(login)
+
+def listUser(request):
+    if request.session.has_key('token'):
+       users = User.objects.all().order_by("-id")
+       return render(request,'manager/users.html',{'users': users}) 
+    else:
+       return redirect(login)
+
+def deleteUser(request,id):
+     if request.session.has_key('token'):
+          user =User.objects.get(id=id)
+          user.delete()
+          return redirect(listUser)  
+     else:
+            return redirect(login)
+
 
 #Log in and Log out Authentication
 def login(request):
